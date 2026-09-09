@@ -46,6 +46,7 @@ def main() -> None:
         "network-manager",
         "pipewire",
         "wireplumber",
+        "mate-polkit",
     }
     assert required_packages <= packages
     assert len(packages) == len(
@@ -55,6 +56,12 @@ def main() -> None:
             if line.strip() and not line.lstrip().startswith("#")
         ]
     ), "package list contains duplicates"
+    assert "policykit-1-gnome" not in packages
+
+    autostart = read(
+        "distro/config/includes.chroot/etc/skel/.config/labwc/autostart"
+    )
+    assert "/usr/libexec/polkit-mate-authentication-agent-1" in autostart
 
     with (OVERLAY / "etc/greetd/config.toml").open("rb") as stream:
         greetd = tomllib.load(stream)

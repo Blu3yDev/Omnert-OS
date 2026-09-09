@@ -18,7 +18,7 @@ dbus-user-session
 xdg-desktop-portal
 xdg-desktop-portal-wlr
 polkitd
-policykit-1-gnome
+mate-polkit
 
 # Networking and Bluetooth
 network-manager
