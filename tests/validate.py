@@ -33,6 +33,11 @@ def main() -> None:
     )
     assert 'sha256sum "${output_dir}/omnertos-x86_64.iso"' not in build_script
 
+    workflow = read(".github/workflows/build-iso.yml")
+    assert "cd build\n          sha256sum --check omnertos-x86_64.iso.sha256" in (
+        workflow
+    )
+
     package_lines = read(
         "distro/config/package-lists/omnertos.list.chroot"
     ).splitlines()
