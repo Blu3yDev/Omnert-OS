@@ -1,0 +1,38 @@
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "DejaVu Sans", sans-serif;
+  font-size: 13px;
+  min-height: 0;
+}
+
+window#waybar {
+  background: rgba(22, 18, 30, 0.94);
+  color: #f5f1ff;
+}
+
+#custom-launcher {
+  background: #7651d6;
+  color: #ffffff;
+  font-weight: bold;
+  margin: 5px 4px 5px 8px;
+  border-radius: 9px;
+}
+
+#taskbar,
+#clock,
+#network,
+#pulseaudio,
+#battery,
+#tray {
+  margin: 4px 6px;
+  padding: 0 8px;
+  border-radius: 8px;
+}
+
+#taskbar button:hover,
+#network:hover,
+#pulseaudio:hover {
+  background: rgba(255, 255, 255, 0.10);
+}
+

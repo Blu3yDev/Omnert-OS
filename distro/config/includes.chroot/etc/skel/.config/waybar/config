@@ -1,0 +1,43 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 36,
+  "spacing": 8,
+  "modules-left": ["custom/launcher", "wlr/taskbar"],
+  "modules-center": ["clock"],
+  "modules-right": ["network", "pulseaudio", "battery", "tray"],
+  "custom/launcher": {
+    "format": "  Omnert  ",
+    "tooltip": false,
+    "on-click": "fuzzel"
+  },
+  "wlr/taskbar": {
+    "format": "{icon}",
+    "icon-size": 20,
+    "tooltip-format": "{title}",
+    "on-click": "activate"
+  },
+  "clock": {
+    "format": "{:%a %d %b  %H:%M}",
+    "tooltip-format": "{:%Y-%m-%d}"
+  },
+  "network": {
+    "format-wifi": "Wi-Fi {signalStrength}%",
+    "format-ethernet": "Wired",
+    "format-disconnected": "Offline",
+    "tooltip-format": "{ifname}: {ipaddr}"
+  },
+  "pulseaudio": {
+    "format": "Audio {volume}%",
+    "format-muted": "Muted",
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+  },
+  "battery": {
+    "format": "Battery {capacity}%",
+    "format-charging": "Charging {capacity}%"
+  },
+  "tray": {
+    "spacing": 10
+  }
+}
+

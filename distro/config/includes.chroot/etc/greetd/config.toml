@@ -1,0 +1,11 @@
+[terminal]
+vt = 1
+
+[initial_session]
+command = "/usr/local/bin/omnert-session"
+user = "omnert"
+
+[default_session]
+command = "/usr/local/bin/omnert-session"
+user = "omnert"
+

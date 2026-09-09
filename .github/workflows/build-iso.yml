@@ -1,0 +1,74 @@
+name: Build OmnertOS ISO
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    tags:
+      - "v*"
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  validate-and-build:
+    name: Validate and build ISO
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Validate image definition
+        run: python3 tests/validate.py
+
+      - name: Build in Debian container
+        run: bash ./scripts/build-container.sh
+
+      - name: Show build results
+        run: |
+          ls -lh build/omnertos-x86_64.iso build/omnertos-x86_64.iso.sha256
+          sha256sum --check build/omnertos-x86_64.iso.sha256
+
+      - name: Upload ISO artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: omnertos-x86_64-${{ github.sha }}
+          path: |
+            build/omnertos-x86_64.iso
+            build/omnertos-x86_64.iso.sha256
+          if-no-files-found: error
+          retention-days: 14
+
+  publish-release:
+    name: Publish tagged release
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: validate-and-build
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+
+    steps:
+      - name: Download built ISO
+        uses: actions/download-artifact@v4
+        with:
+          name: omnertos-x86_64-${{ github.sha }}
+          path: build
+
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${GITHUB_REF_NAME}" \
+            build/omnertos-x86_64.iso \
+            build/omnertos-x86_64.iso.sha256 \
+            --repo "${GITHUB_REPOSITORY}" \
+            --title "OmnertOS ${GITHUB_REF_NAME}" \
+            --generate-notes \
+            --prerelease
+

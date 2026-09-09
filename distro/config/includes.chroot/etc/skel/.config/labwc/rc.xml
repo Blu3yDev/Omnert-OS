@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<labwc_config>
+  <theme>
+    <cornerRadius>8</cornerRadius>
+    <font place="ActiveWindow">
+      <name>DejaVu Sans</name>
+      <size>10</size>
+      <weight>Normal</weight>
+    </font>
+  </theme>
+
+  <keyboard>
+    <keybind key="W-Return">
+      <action name="Execute">
+        <command>foot</command>
+      </action>
+    </keybind>
+    <keybind key="W-d">
+      <action name="Execute">
+        <command>fuzzel</command>
+      </action>
+    </keybind>
+    <keybind key="W-q">
+      <action name="Close" />
+    </keybind>
+    <keybind key="W-S-e">
+      <action name="Exit" />
+    </keybind>
+  </keyboard>
+
+  <mouse>
+    <context name="Frame">
+      <mousebind button="A-Left" action="Press">
+        <action name="Focus" />
+        <action name="Raise" />
+      </mousebind>
+      <mousebind button="A-Left" action="Drag">
+        <action name="Move" />
+      </mousebind>
+      <mousebind button="A-Right" action="Drag">
+        <action name="Resize" />
+      </mousebind>
+    </context>
+  </mouse>
+</labwc_config>

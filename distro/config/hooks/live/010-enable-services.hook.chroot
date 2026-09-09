@@ -1,0 +1,7 @@
+#!/bin/sh
+set -eu
+
+systemctl enable greetd.service
+systemctl enable NetworkManager.service
+systemctl enable bluetooth.service
+

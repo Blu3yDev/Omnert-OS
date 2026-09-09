@@ -1,0 +1,8 @@
+.build-work
+.git
+.github
+build
+*.iso
+*.img
+*.log
+

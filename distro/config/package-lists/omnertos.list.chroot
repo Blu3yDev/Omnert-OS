@@ -1,0 +1,50 @@
+# Boot and live environment
+linux-image-amd64
+live-boot
+live-config
+live-config-systemd
+systemd-sysv
+sudo
+locales
+
+# Wayland desktop
+labwc
+waybar
+foot
+swaybg
+fuzzel
+greetd
+dbus-user-session
+xdg-desktop-portal
+xdg-desktop-portal-wlr
+polkitd
+policykit-1-gnome
+
+# Networking and Bluetooth
+network-manager
+network-manager-gnome
+wireless-regdb
+iw
+rfkill
+bluez
+
+# Audio
+pipewire
+pipewire-audio
+wireplumber
+
+# Hardware and basic user tools
+firmware-linux-free
+firmware-misc-nonfree
+mesa-vulkan-drivers
+libgl1-mesa-dri
+fonts-dejavu-core
+adwaita-icon-theme
+ca-certificates
+curl
+less
+nano
+procps
+iproute2
+usbutils
+pciutils

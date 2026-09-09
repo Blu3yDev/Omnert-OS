@@ -1,0 +1,86 @@
+#!/usr/bin/env python3
+"""Fast, host-independent checks for the OmnertOS image definition."""
+
+from __future__ import annotations
+
+import json
+import tomllib
+import xml.etree.ElementTree as ET
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+OVERLAY = ROOT / "distro/config/includes.chroot"
+
+
+def read(relative_path: str) -> str:
+    return (ROOT / relative_path).read_text(encoding="utf-8")
+
+
+def main() -> None:
+    config = read("distro/auto/config")
+    assert "--distribution trixie" in config
+    assert "--binary-images iso-hybrid" in config
+    assert "--debian-installer none" in config
+    assert "username=omnert" in config
+
+    package_lines = read(
+        "distro/config/package-lists/omnertos.list.chroot"
+    ).splitlines()
+    packages = {
+        line.strip()
+        for line in package_lines
+        if line.strip() and not line.lstrip().startswith("#")
+    }
+    required_packages = {
+        "linux-image-amd64",
+        "live-boot",
+        "labwc",
+        "waybar",
+        "foot",
+        "fuzzel",
+        "greetd",
+        "network-manager",
+        "pipewire",
+        "wireplumber",
+    }
+    assert required_packages <= packages
+    assert len(packages) == len(
+        [
+            line.strip()
+            for line in package_lines
+            if line.strip() and not line.lstrip().startswith("#")
+        ]
+    ), "package list contains duplicates"
+
+    with (OVERLAY / "etc/greetd/config.toml").open("rb") as stream:
+        greetd = tomllib.load(stream)
+    assert greetd["initial_session"] == {
+        "command": "/usr/local/bin/omnert-session",
+        "user": "omnert",
+    }
+
+    with (
+        OVERLAY / "etc/skel/.config/waybar/config"
+    ).open(encoding="utf-8") as stream:
+        waybar = json.load(stream)
+    assert "custom/launcher" in waybar["modules-left"]
+    assert "network" in waybar["modules-right"]
+
+    labwc = ET.parse(
+        OVERLAY / "etc/skel/.config/labwc/rc.xml"
+    ).getroot()
+    assert labwc.tag == "labwc_config"
+    assert labwc.find("./keyboard/keybind/action/command") is not None
+
+    wallpaper = ET.parse(
+        OVERLAY / "usr/share/backgrounds/omnertos/default.svg"
+    ).getroot()
+    assert wallpaper.tag.endswith("svg")
+
+    print("OmnertOS image definition checks passed.")
+
+
+if __name__ == "__main__":
+    main()
+

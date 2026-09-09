@@ -1,0 +1,7 @@
+/build/*
+!/build/.gitkeep
+/.build-work/
+*.iso
+*.img
+*.log
+

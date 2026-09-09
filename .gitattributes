@@ -1,0 +1,12 @@
+* text=auto
+
+*.sh text eol=lf
+*.hook.chroot text eol=lf
+distro/auto/* text eol=lf
+distro/config/includes.chroot/usr/local/bin/* text eol=lf
+*.toml text eol=lf
+*.xml text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+

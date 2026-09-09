@@ -1,0 +1,11 @@
+#!/bin/sh
+set -eu
+
+export XDG_SESSION_TYPE=wayland
+export XDG_CURRENT_DESKTOP=Omnert
+export XDG_SESSION_DESKTOP=Omnert
+export MOZ_ENABLE_WAYLAND=1
+export QT_QPA_PLATFORM=wayland
+
+exec dbus-run-session labwc
+
