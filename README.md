@@ -51,12 +51,22 @@ bash ./scripts/build-container.sh
 
 ## Run in QEMU
 
+Linux:
+
 ```bash
 bash ./scripts/run-qemu.sh
 ```
 
-The QEMU helper is intentionally non-destructive: it only attaches the ISO as
-read-only installation media and creates no virtual disk.
+Windows PowerShell:
+
+```powershell
+winget install --exact --id SoftwareFreedomConservancy.QEMU
+.\scripts\run-qemu.ps1
+```
+
+Place `omnertos-x86_64.iso` in `build/` before launching. Both QEMU helpers are
+intentionally non-destructive: they only attach the ISO as read-only media and
+create no virtual disk.
 
 ## Desktop controls
 

@@ -46,6 +46,19 @@ The VM receives user-mode NAT networking, so wired connectivity should appear
 automatically through NetworkManager. The helper uses 2 GiB RAM and two virtual
 CPUs; these are test settings, not minimum system requirements.
 
+### Windows
+
+After downloading and extracting the GitHub Actions artifact, ensure the ISO is
+located at `build/omnertos-x86_64.iso`. Install QEMU and start the diskless VM:
+
+```powershell
+winget install --exact --id SoftwareFreedomConservancy.QEMU
+.\scripts\run-qemu.ps1
+```
+
+Restart PowerShell after installing QEMU so its command is discoverable. The
+Windows helper also checks QEMU's default installation directory.
+
 If virgl is unavailable, replace `-device virtio-vga-gl -display gtk,gl=on` in
 the command with `-device virtio-vga -display gtk` for software rendering.
 
