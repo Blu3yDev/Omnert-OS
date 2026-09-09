@@ -24,6 +24,9 @@ def main() -> None:
     assert "--debian-installer none" in config
     assert "username=omnert" in config
 
+    clean = read("distro/auto/clean")
+    assert "lb clean noauto --purge" in clean
+
     package_lines = read(
         "distro/config/package-lists/omnertos.list.chroot"
     ).splitlines()
@@ -83,4 +86,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
