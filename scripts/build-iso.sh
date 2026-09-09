@@ -11,7 +11,7 @@ if [[ "${EUID}" -ne 0 ]]; then
   exit 1
 fi
 
-for command_name in lb debootstrap xorriso mksquashfs rsync; do
+for command_name in lb debootstrap xorriso mksquashfs rsync sha256sum; do
   if ! command -v "${command_name}" >/dev/null 2>&1; then
     echo "Missing required build command: ${command_name}" >&2
     exit 1
@@ -37,5 +37,8 @@ if [[ -z "${iso_path}" ]]; then
 fi
 
 install -m 0644 "${iso_path}" "${output_dir}/omnertos-x86_64.iso"
-sha256sum "${output_dir}/omnertos-x86_64.iso" > "${output_dir}/omnertos-x86_64.iso.sha256"
+(
+  cd "${output_dir}"
+  sha256sum omnertos-x86_64.iso > omnertos-x86_64.iso.sha256
+)
 echo "Built ${output_dir}/omnertos-x86_64.iso"

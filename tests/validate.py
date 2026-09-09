@@ -27,6 +27,12 @@ def main() -> None:
     clean = read("distro/auto/clean")
     assert "lb clean noauto --purge" in clean
 
+    build_script = read("scripts/build-iso.sh")
+    assert "sha256sum omnertos-x86_64.iso > omnertos-x86_64.iso.sha256" in (
+        build_script
+    )
+    assert 'sha256sum "${output_dir}/omnertos-x86_64.iso"' not in build_script
+
     package_lines = read(
         "distro/config/package-lists/omnertos.list.chroot"
     ).splitlines()
