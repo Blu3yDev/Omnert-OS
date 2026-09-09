@@ -1,0 +1,17 @@
+#!/bin/sh
+set -eu
+
+choice="$(printf '%s\n' \
+  'Network' \
+  'Bluetooth' \
+  'Sound' \
+  'Displays' \
+  | fuzzel --dmenu --prompt='Quick settings  ' --lines=4 --width=28)" || exit 0
+
+case "${choice}" in
+  Network) exec nm-connection-editor ;;
+  Bluetooth) exec blueman-manager ;;
+  Sound) exec pavucontrol ;;
+  Displays) exec wdisplays ;;
+esac
+

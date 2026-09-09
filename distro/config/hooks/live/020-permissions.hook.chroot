@@ -1,5 +1,12 @@
 #!/bin/sh
 set -eu
 
-chmod 0755 /usr/local/bin/omnert-session
+chmod 0755 \
+  /usr/local/bin/omnert-session \
+  /usr/local/bin/omnert-quick-settings \
+  /usr/local/bin/omnert-power-menu
 
+install -d /usr/share/icons/hicolor/256x256/apps
+ln -sfn \
+  /usr/share/omnertos/brand/omnert-logo.png \
+  /usr/share/icons/hicolor/256x256/apps/omnertos.png

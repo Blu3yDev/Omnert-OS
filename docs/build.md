@@ -59,6 +59,16 @@ winget install --exact --id SoftwareFreedomConservancy.QEMU
 Restart PowerShell after installing QEMU so its command is discoverable. The
 Windows helper also checks QEMU's default installation directory.
 
+The launcher defaults to slower software emulation because it is the most
+compatible Windows path. If Windows Hypervisor Platform is enabled and stable
+on the machine, opt into acceleration:
+
+```powershell
+.\scripts\run-qemu.ps1 -HardwareAcceleration
+```
+
+The first desktop boot can take roughly two minutes under software emulation.
+
 If virgl is unavailable, replace `-device virtio-vga-gl -display gtk,gl=on` in
 the command with `-device virtio-vga -display gtk` for software rendering.
 

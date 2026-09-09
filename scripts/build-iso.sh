@@ -20,6 +20,9 @@ done
 
 mkdir -p "${work_dir}" "${output_dir}"
 rsync -a --delete "${project_root}/distro/" "${work_dir}/"
+install -D -m 0644 \
+  "${project_root}/assets/brand/omnert-logo.png" \
+  "${work_dir}/config/includes.chroot/usr/share/omnertos/brand/omnert-logo.png"
 chmod 0755 \
   "${work_dir}/auto/config" \
   "${work_dir}/auto/clean" \

@@ -1,43 +1,92 @@
 {
   "layer": "top",
   "position": "top",
-  "height": 36,
-  "spacing": 8,
-  "modules-left": ["custom/launcher", "wlr/taskbar"],
+  "height": 44,
+  "spacing": 6,
+  "modules-left": ["image#omnert", "custom/launcher", "wlr/taskbar"],
   "modules-center": ["clock"],
-  "modules-right": ["network", "pulseaudio", "battery", "tray"],
+  "modules-right": [
+    "tray",
+    "bluetooth",
+    "network",
+    "pulseaudio",
+    "battery",
+    "custom/notifications",
+    "custom/quick-settings",
+    "custom/power"
+  ],
+  "image#omnert": {
+    "path": "/usr/share/omnertos/brand/omnert-logo.png",
+    "size": 24,
+    "tooltip": false,
+    "on-click": "fuzzel"
+  },
   "custom/launcher": {
-    "format": "  Omnert  ",
+    "format": "Omnert",
     "tooltip": false,
     "on-click": "fuzzel"
   },
   "wlr/taskbar": {
     "format": "{icon}",
-    "icon-size": 20,
+    "icon-size": 18,
     "tooltip-format": "{title}",
-    "on-click": "activate"
+    "on-click": "activate",
+    "on-click-middle": "close"
   },
   "clock": {
-    "format": "{:%a %d %b  %H:%M}",
-    "tooltip-format": "{:%Y-%m-%d}"
+    "format": "{:%H:%M}",
+    "tooltip-format": "{:%A, %d %B %Y}"
+  },
+  "bluetooth": {
+    "format": "",
+    "format-connected": " {num_connections}",
+    "format-disabled": "",
+    "tooltip-format": "{controller_alias}\t{controller_address}",
+    "on-click": "blueman-manager"
   },
   "network": {
-    "format-wifi": "Wi-Fi {signalStrength}%",
-    "format-ethernet": "Wired",
-    "format-disconnected": "Offline",
-    "tooltip-format": "{ifname}: {ipaddr}"
+    "format-wifi": "  {signalStrength}%",
+    "format-ethernet": "",
+    "format-disconnected": "",
+    "tooltip-format": "{ifname}  {ipaddr}",
+    "on-click": "nm-connection-editor"
   },
   "pulseaudio": {
-    "format": "Audio {volume}%",
-    "format-muted": "Muted",
-    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+    "format": "{icon}  {volume}%",
+    "format-icons": ["", "", ""],
+    "format-muted": "  muted",
+    "on-click": "pavucontrol",
+    "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+",
+    "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
   },
   "battery": {
-    "format": "Battery {capacity}%",
-    "format-charging": "Charging {capacity}%"
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon}  {capacity}%",
+    "format-charging": "  {capacity}%",
+    "format-icons": ["", "", "", "", ""]
+  },
+  "custom/notifications": {
+    "format": "",
+    "tooltip": "Dismiss notifications",
+    "on-click": "makoctl dismiss --all",
+    "on-click-right": "makoctl restore"
+  },
+  "custom/quick-settings": {
+    "format": "",
+    "tooltip": "Quick settings",
+    "on-click": "omnert-quick-settings"
+  },
+  "custom/power": {
+    "format": "",
+    "tooltip": "Session and power",
+    "on-click": "omnert-power-menu"
   },
   "tray": {
-    "spacing": 10
+    "icon-size": 17,
+    "spacing": 8
   }
 }
-

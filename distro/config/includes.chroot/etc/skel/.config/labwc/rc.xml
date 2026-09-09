@@ -1,9 +1,10 @@
 <?xml version="1.0"?>
 <labwc_config>
   <theme>
+    <name>Omnert</name>
     <cornerRadius>8</cornerRadius>
     <font place="ActiveWindow">
-      <name>DejaVu Sans</name>
+      <name>Inter</name>
       <size>10</size>
       <weight>Normal</weight>
     </font>

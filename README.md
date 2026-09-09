@@ -1,5 +1,9 @@
 # OmnertOS
 
+<p align="center">
+  <img src="assets/brand/omnert-logo.png" width="144" alt="OmnertOS violet aperture logo">
+</p>
+
 OmnertOS is a lightweight Linux desktop focused on a clean everyday experience.
 The current repository implements the **Phase 1 bootable prototype**: a Debian
 Live ISO that starts a minimal Wayland desktop with working input, networking,
@@ -77,6 +81,10 @@ create no virtual disk.
 
 See [docs/architecture.md](docs/architecture.md) for design boundaries and
 [docs/build.md](docs/build.md) for build and troubleshooting details.
+
+Project progress is tracked in [LEDGER.md](LEDGER.md) and the executable queue
+in [TASKS.md](TASKS.md). These documents distinguish verified work from planned
+features and define when OmnertOS can honestly be called installable.
 
 ## Build and publish with GitHub
 

@@ -1,4 +1,5 @@
 swaybg --image /usr/share/backgrounds/omnertos/default.svg --mode fill &
 waybar &
 nm-applet --indicator &
+/usr/bin/mako &
 /usr/libexec/polkit-mate-authentication-agent-1 &

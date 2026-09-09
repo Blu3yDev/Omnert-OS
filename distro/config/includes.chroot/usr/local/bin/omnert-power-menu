@@ -1,0 +1,30 @@
+#!/bin/sh
+set -eu
+
+choice="$(printf '%s\n' \
+  'Lock' \
+  'Log out' \
+  'Restart' \
+  'Shut down' \
+  | fuzzel --dmenu --prompt='Session  ' --lines=4 --width=24)" || exit 0
+
+confirm() {
+  action="$1"
+  answer="$(printf '%s\n' 'Cancel' "${action}" \
+    | fuzzel --dmenu --prompt="Confirm ${action}  " --lines=2 --width=26)" || return 1
+  [ "${answer}" = "${action}" ]
+}
+
+case "${choice}" in
+  Lock) exec swaylock --daemonize ;;
+  'Log out')
+    confirm 'Log out' && exec labwc --exit
+    ;;
+  Restart)
+    confirm 'Restart' && exec systemctl reboot
+    ;;
+  'Shut down')
+    confirm 'Shut down' && exec systemctl poweroff
+    ;;
+esac
+

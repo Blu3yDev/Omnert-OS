@@ -14,6 +14,8 @@ foot
 swaybg
 fuzzel
 greetd
+mako-notifier
+swaylock
 dbus-user-session
 xdg-desktop-portal
 xdg-desktop-portal-wlr
@@ -23,6 +25,7 @@ mate-polkit
 # Networking and Bluetooth
 network-manager
 network-manager-gnome
+blueman
 wireless-regdb
 iw
 rfkill
@@ -32,6 +35,7 @@ bluez
 pipewire
 pipewire-audio
 wireplumber
+pavucontrol
 
 # Hardware and basic user tools
 firmware-linux-free
@@ -39,7 +43,14 @@ firmware-misc-nonfree
 mesa-vulkan-drivers
 libgl1-mesa-dri
 fonts-dejavu-core
+fonts-inter
+fonts-jetbrains-mono
+fonts-font-awesome
 adwaita-icon-theme
+papirus-icon-theme
+brightnessctl
+wdisplays
+libnotify-bin
 ca-certificates
 curl
 less

@@ -1,0 +1,45 @@
+# Omnert window chrome: quiet structure with a violet focus signal.
+window.titlebar.padding.width: 10
+window.titlebar.padding.height: 8
+window.button.width: 24
+window.button.height: 24
+window.button.spacing: 4
+
+window.active.title.bg.color: #1c1727
+window.inactive.title.bg.color: #17131f
+window.active.label.text.color: #f7f4ff
+window.inactive.label.text.color: #9e96ab
+window.active.border.color: #8b5cf6
+window.inactive.border.color: #31293d
+window.active.button.unpressed.image.color: #e9e1f7
+window.inactive.button.unpressed.image.color: #8e879a
+window.button.hover.bg.color: #7651d6
+window.button.hover.bg.corner-radius: 12
+
+window.active.shadow.size: 18
+window.active.shadow.color: #09060db0
+window.inactive.shadow.size: 12
+window.inactive.shadow.color: #09060d80
+
+menu.overlap.x: 4
+menu.overlap.y: 4
+menu.border.width: 1
+menu.border.color: #49395f
+menu.items.bg.color: #1b1625
+menu.items.text.color: #f7f4ff
+menu.items.active.bg.color: #7651d6
+menu.items.active.text.color: #ffffff
+menu.separator.color: #49395f
+menu.title.bg.color: #17131f
+menu.title.text.color: #cbb5ff
+
+osd.bg.color: #1b1625
+osd.border.width: 1
+osd.border.color: #6f4db1
+osd.label.text.color: #f7f4ff
+
+snapping.overlay.region.bg.color: #7651d640
+snapping.overlay.region.border.color: #bfa4ffb0
+snapping.overlay.edge.bg.color: #7651d626
+snapping.overlay.edge.border.color: #bfa4ff8c
+

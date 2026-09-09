@@ -1,38 +1,107 @@
 * {
   border: none;
   border-radius: 0;
-  font-family: "DejaVu Sans", sans-serif;
+  font-family: "Inter", "FontAwesome", "Font Awesome 6 Free", "Font Awesome 5 Free", sans-serif;
   font-size: 13px;
   min-height: 0;
 }
 
 window#waybar {
-  background: rgba(22, 18, 30, 0.94);
-  color: #f5f1ff;
+  background: rgba(18, 15, 26, 0.96);
+  border-bottom: 1px solid rgba(191, 164, 255, 0.14);
+  color: #f7f4ff;
+}
+
+#image.omnert {
+  margin: 7px 0 7px 10px;
+  padding: 0;
+}
+
+#image.omnert button {
+  background: transparent;
+  border-radius: 9px;
+  padding: 2px;
 }
 
 #custom-launcher {
-  background: #7651d6;
-  color: #ffffff;
-  font-weight: bold;
-  margin: 5px 4px 5px 8px;
-  border-radius: 9px;
+  color: #f7f4ff;
+  font-weight: 700;
+  margin: 6px 8px 6px 0;
+  padding: 0 6px 0 2px;
 }
 
-#taskbar,
 #clock,
+#bluetooth,
 #network,
 #pulseaudio,
 #battery,
-#tray {
-  margin: 4px 6px;
+#custom-notifications,
+#custom-quick-settings,
+#custom-power,
+#tray,
+#taskbar button {
+  background: rgba(255, 255, 255, 0.055);
+  border: 1px solid rgba(255, 255, 255, 0.045);
+  border-radius: 10px;
+  margin: 6px 2px;
+  padding: 0 10px;
+  transition-property: background-color, color, border-color;
+  transition-duration: 120ms;
+}
+
+#clock {
+  font-weight: 650;
+  letter-spacing: 0.2px;
+  padding: 0 14px;
+}
+
+#taskbar {
+  background: transparent;
+  margin: 0 4px;
+}
+
+#taskbar button {
   padding: 0 8px;
-  border-radius: 8px;
 }
 
-#taskbar button:hover,
+#taskbar button.active {
+  background: rgba(139, 92, 246, 0.26);
+  border-color: rgba(185, 156, 255, 0.28);
+}
+
+#bluetooth:hover,
 #network:hover,
-#pulseaudio:hover {
-  background: rgba(255, 255, 255, 0.10);
+#pulseaudio:hover,
+#custom-notifications:hover,
+#custom-quick-settings:hover,
+#custom-power:hover,
+#taskbar button:hover,
+#image.omnert button:hover {
+  background: rgba(167, 126, 255, 0.20);
+  border-color: rgba(203, 181, 255, 0.22);
 }
 
+#battery.warning {
+  color: #f2c879;
+}
+
+#battery.critical,
+#network.disconnected {
+  color: #ff858f;
+}
+
+#custom-power {
+  color: #cbb5ff;
+  margin-right: 8px;
+}
+
+tooltip {
+  background: #211b2d;
+  border: 1px solid rgba(203, 181, 255, 0.22);
+  border-radius: 9px;
+}
+
+tooltip label {
+  color: #f7f4ff;
+  padding: 6px;
+}

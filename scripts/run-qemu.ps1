@@ -4,7 +4,9 @@ param(
     [int] $MemoryMb = 2048,
 
     [ValidateRange(1, 32)]
-    [int] $CpuCount = 2
+    [int] $CpuCount = 2,
+
+    [switch] $HardwareAcceleration
 )
 
 $ErrorActionPreference = 'Stop'
@@ -41,12 +43,20 @@ Restart PowerShell after installation, then run this script again.
 Write-Host 'Starting OmnertOS in a temporary, diskless virtual machine...'
 Write-Host 'Close the QEMU window to stop it.'
 
+$acceleratorArguments = if ($HardwareAcceleration) {
+    @('-accel', 'whpx')
+} else {
+    @()
+}
+
 & $qemuPath `
     -name 'OmnertOS Live' `
+    @acceleratorArguments `
     -machine q35 `
     -m $MemoryMb `
     -smp $CpuCount `
     -device virtio-vga `
+    -display sdl `
     -nic 'user,model=virtio-net-pci' `
     -device qemu-xhci `
     -device usb-tablet `
@@ -56,4 +66,3 @@ Write-Host 'Close the QEMU window to stop it.'
 if ($LASTEXITCODE -ne 0) {
     throw "QEMU exited with code $LASTEXITCODE."
 }
-

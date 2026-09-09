@@ -1,0 +1,11 @@
+PRETTY_NAME="OmnertOS 0.1 Violet"
+NAME="OmnertOS"
+VERSION_ID="0.1"
+VERSION="0.1 Violet (Experimental Live)"
+VERSION_CODENAME=violet
+ID=omnertos
+ID_LIKE=debian
+HOME_URL="https://github.com/Blu3yDev/Omnert-OS"
+SUPPORT_URL="https://github.com/Blu3yDev/Omnert-OS/issues"
+BUG_REPORT_URL="https://github.com/Blu3yDev/Omnert-OS/issues"
+

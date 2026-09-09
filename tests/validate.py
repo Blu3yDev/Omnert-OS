@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import struct
 import tomllib
 import xml.etree.ElementTree as ET
 from pathlib import Path
@@ -58,6 +59,15 @@ def main() -> None:
         "pipewire",
         "wireplumber",
         "mate-polkit",
+        "mako-notifier",
+        "swaylock",
+        "pavucontrol",
+        "blueman",
+        "wdisplays",
+        "fonts-inter",
+        "fonts-jetbrains-mono",
+        "fonts-font-awesome",
+        "papirus-icon-theme",
     }
     assert required_packages <= packages
     assert len(packages) == len(
@@ -73,6 +83,7 @@ def main() -> None:
         "distro/config/includes.chroot/etc/skel/.config/labwc/autostart"
     )
     assert "/usr/libexec/polkit-mate-authentication-agent-1" in autostart
+    assert "/usr/bin/mako" in autostart
 
     with (OVERLAY / "etc/greetd/config.toml").open("rb") as stream:
         greetd = tomllib.load(stream)
@@ -87,17 +98,45 @@ def main() -> None:
         waybar = json.load(stream)
     assert "custom/launcher" in waybar["modules-left"]
     assert "network" in waybar["modules-right"]
+    assert "image#omnert" in waybar["modules-left"]
+    assert "custom/quick-settings" in waybar["modules-right"]
+    assert "custom/power" in waybar["modules-right"]
+    assert waybar["image#omnert"]["path"] == (
+        "/usr/share/omnertos/brand/omnert-logo.png"
+    )
+
+    waybar_style = read(
+        "distro/config/includes.chroot/etc/skel/.config/waybar/style.css"
+    )
+    assert "transition: all" not in waybar_style
+    assert "transition-duration: 120ms" in waybar_style
 
     labwc = ET.parse(
         OVERLAY / "etc/skel/.config/labwc/rc.xml"
     ).getroot()
     assert labwc.tag == "labwc_config"
     assert labwc.find("./keyboard/keybind/action/command") is not None
+    assert labwc.findtext("./theme/name") == "Omnert"
 
     wallpaper = ET.parse(
         OVERLAY / "usr/share/backgrounds/omnertos/default.svg"
     ).getroot()
     assert wallpaper.tag.endswith("svg")
+
+    logo = (ROOT / "assets/brand/omnert-logo.png").read_bytes()
+    assert logo[:8] == b"\x89PNG\r\n\x1a\n"
+    assert struct.unpack(">II", logo[16:24]) == (1254, 1254)
+    assert "assets/brand/omnert-logo.png" in build_script
+
+    power_menu = read(
+        "distro/config/includes.chroot/usr/local/bin/omnert-power-menu"
+    )
+    assert "confirm 'Restart'" in power_menu
+    assert "confirm 'Shut down'" in power_menu
+
+    os_release = read("distro/config/includes.chroot/etc/os-release")
+    assert "ID=omnertos" in os_release
+    assert "ID_LIKE=debian" in os_release
 
     print("OmnertOS image definition checks passed.")
 
